@@ -43,6 +43,7 @@ Es un hackrom en desarrollo completamente en castellano usando la pokeemerald-ex
 - Merrp por:
   * Followers.
   * Sistema día y noche.
+  * Sistema de iconos.
 
 - Ghoulslash por:
   * Expansión de overworlds.
