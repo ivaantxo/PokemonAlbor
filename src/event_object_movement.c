@@ -53,6 +53,13 @@
 
 // this file was known as evobjmv.c in Game Freak's original source
 
+//castform forms
+#define CASTFORM_NORMAL     0
+#define CASTFORM_FIRE       1
+#define CASTFORM_WATER      2
+#define CASTFORM_ICE        3
+#define NUM_CASTFORM_FORMS  4
+
 enum {
     MOVE_SPEED_NORMAL, // walking
     MOVE_SPEED_FAST_1, // running / surfing / sliding (ice tile)
