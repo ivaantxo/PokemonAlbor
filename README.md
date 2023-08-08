@@ -44,6 +44,7 @@ Es un hackrom en desarrollo completamente en castellano usando la pokeemerald-ex
   * Followers.
   * Sistema día y noche.
   * Sistema de iconos.
+  * Rueda de objetos clave.
 
 - Ghoulslash por:
   * Expansión de overworlds.

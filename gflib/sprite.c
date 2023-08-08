@@ -1503,8 +1503,8 @@ u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u8 frame) {
     struct SpriteSheet tempSheet;
     // error if template is null or tile tag or images not set
     if (!template || template->tileTag == TAG_NONE || !template->images)
-        return 0xFFFF;
-    if ((tileStart = GetSpriteTileStartByTag(template->tileTag)) != 0xFFFF) // return if already loaded
+        return TAG_NONE;
+    if ((tileStart = GetSpriteTileStartByTag(template->tileTag)) != TAG_NONE) // return if already loaded
         return tileStart;
     tempSheet.data = template->images[frame].data;
     tempSheet.size = template->images[frame].size;
