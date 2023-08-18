@@ -5108,6 +5108,7 @@ extern const u8 gMonIcon_QuestionMark[];
 extern const u8 gMonIcon_Bulbasaur[];
 extern const u8 gMonIcon_Ivysaur[];
 extern const u8 gMonIcon_Venusaur[];
+extern const u8 gMonIcon_VenusaurF[];
 extern const u8 gMonIcon_Charmander[];
 extern const u8 gMonIcon_Charmeleon[];
 extern const u8 gMonIcon_Charizard[];
