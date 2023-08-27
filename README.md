@@ -16,6 +16,7 @@ Es un hackrom en desarrollo completamente en castellano usando la pokeemerald-ex
   *Psíquico x2 a acero.
   *Bicho x2 a hada.
   *Bicho x2 a fantasma.
+  *Tierra x0,5 a normal.
 
   -Cambios de habilidades especiales de tipos:
   *Normal inmune a Otra vez.
