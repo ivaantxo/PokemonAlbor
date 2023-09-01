@@ -50,3 +50,6 @@ Es un hackrom en desarrollo completamente en castellano usando la pokeemerald-ex
 - Ghoulslash por:
   * Expansión de overworlds.
   * Autorun.
+
+## Notas desarrollo
+- Mankey/Primeape no se han balanceado, esperando a Annihilape.
