@@ -207,8 +207,7 @@ const u8 gText_MaleSymbol[] = _("♂");
 const u8 gText_FemaleSymbol[] = _("♀");
 const u8 gText_LevelSymbol[] = _("{LV}");
 const u8 gText_NumberClear01[] = _("{NO}{CLEAR 0x01}");
-const u8 gText_PlusSymbol[] = _("+"); // Unused
-const u8 gText_RightArrow[] = _("{RIGHT_ARROW}"); // Unused
+const u8 gText_Clear01[] = _("{CLEAR 0x01}");
 const u8 gText_IDNumber2[] = _("{ID}{NO}");
 const u8 gText_Space[] = _(" ");
 const u8 gText_SelectorArrow2[] = _("▶");
@@ -1832,3 +1831,14 @@ const u8 gText_Answer[] = _("ANSWER");
 const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BERRY");
 const u8 gText_Berries[] = _("BERRIES");
+
+// frlg_tm_case_port
+const u8 gText_TMCase[] =               _("Tubo MT/MO");
+const u8 gText_Close[] =                _("Cerrar");
+const u8 gText_TMCaseWillBePutAway[] =  _("Has guardado el\ntubo MT/MO.");
+const u8 gText_FontSmall[] =            _("{FONT_SMALL}");
+const u8 gText_FontShort[] =            _("{FONT_SHORT}");
+const u8 gText_TMCase_Blue[] =          _("{COLOR_HIGHLIGHT_SHADOW BLUE TRANSPARENT LIGHT_BLUE}{STR_VAR_2}");
+const u8 gText_MT[] = _("MT");
+const u8 gText_MO[] = _("MO");
+

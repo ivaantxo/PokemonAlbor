@@ -3035,4 +3035,15 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
+// frlg_tm_case_port
+extern const u8 gText_TMCase[];
+extern const u8 gText_Close[];
+extern const u8 gText_TMCaseWillBePutAway[];
+extern const u8 gText_FontSmall[];
+extern const u8 gText_FontShort[];
+extern const u8 gText_TMCase_Blue[];
+extern const u8 gText_MT[];
+extern const u8 gText_MO[];
+extern const u8 gText_Clear01[];
+
 #endif // GUARD_STRINGS_H
