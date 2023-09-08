@@ -10648,8 +10648,6 @@ extern const u32 gUnknown_8E84B70[];
 extern const u32 gUnknown_8E84CB0[];
 extern const u32 gUnknown_8E84D20[];
 extern const u32 gTMCase_TMSpriteGfx[];
-extern const u32 gUnknown_8E84F20[];
-extern const u32 gUnknown_8E85068[];
 extern const u16 gTMCaseMainWindowPalette[];
 
 #endif //GUARD_GRAPHICS_H

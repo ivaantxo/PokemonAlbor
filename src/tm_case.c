@@ -176,8 +176,7 @@ static const u8 sMenuActionIndices_UnionRoom[] = {0, 1};
 
 static const u8 sText_SingleSpace[] = _(" ");
 
-const u8 gItemDescription_ITEM_TM_CASE[] = _("A case that holds TMs and HMs.\nIt is attached to the BAG's\ncompartment for important items.");
-//const u16 gTMCaseMainWindowPalette[] = INCBIN_U16("graphics/tm_case/unk_841F408.gbapal");
+const u8 gItemDescription_ITEM_TM_CASE[] = _("Tubo para guardar máquinas.\ntécnicas (MTs) y máquinas ocultas (MOs).");
 
 static ALIGNED(4) const u16 sPal3Override[] = {RGB(8, 8, 8), RGB(30, 16, 6)};
 
@@ -455,7 +454,6 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
         }
         break;
     case 2:
-        // LZDecompressWram(gUnknown_8E84B70, GetBgTilemapBuffer(1)); //TM case bg graphic
         sTMCaseDynamicResources->seqId++;
         break;
     case 3:
