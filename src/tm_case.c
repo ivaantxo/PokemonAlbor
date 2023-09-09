@@ -796,19 +796,12 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
     InitMenuInUpperLeftCornerNormal(sTMCaseDynamicResources->contextMenuWindowId, sTMCaseDynamicResources->numMenuActions, 0);
     
     //"Move xyz is selected" text and window (no shoing the right palette)
-    TMCase_SetWindowBorder3(2); // context window border style
+    //TMCase_SetWindowBorder3(2); // context window border style
     strbuf = Alloc(256);
     GetTMNumberAndMoveString(strbuf, gSpecialVar_ItemId);
     StringAppend(strbuf, gText_Var1IsSelected + 2); // +2 skips over the stringvar
     AddTextPrinterParameterized_ColorByIndex(2, 2, strbuf, 0, 2, 1, 0, 0, 4);
     Free(strbuf);
-
-    //show HM icon
-    if (ItemId_GetImportance(gSpecialVar_ItemId))
-    {
-
-    }
-
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
     gTasks[taskId].func = Task_TMContextMenu_HandleInput;
@@ -998,7 +991,6 @@ static void DrawMoveInfoUIMarkers(void)
     CopyWindowToVram(4, 2);
 }
 
-// different from pokemon_summary_screen
 #define TYPE_ICON_PAL_1     12
 #define TYPE_ICON_PAL_2     13
 
@@ -1171,15 +1163,11 @@ static void DrawPartyMonIcons(void)
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
 
         //create icon sprite
-        #ifndef POKEMON_EXPANSION
-            spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY), TRUE);
-        #else
-            spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY));
-        #endif
+        spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY));
 
         //Set priority, stop movement and save original palette position
         gSprites[spriteIdData[i]].oam.priority = 0;
-        StartSpriteAnim(&gSprites[spriteIdData[i]], 4); //full stop
+        StartSpriteAnim(&gSprites[spriteIdData[i]], 0);
         spriteIdPalette[i] = gSprites[spriteIdData[i]].oam.paletteNum; //save correct palette number to array
     }
 }
