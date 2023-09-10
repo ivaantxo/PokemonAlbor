@@ -49,3 +49,10 @@ Es un hackrom en desarrollo completamente en castellano usando la pokeemerald-ex
 - Ghoulslash por:
   * Expansión de overworlds.
   * Autorun.
+
+- Citrusbolt por:
+  * Huevos del color de su tipo.
+  * Pokémon con paletas únicas.
+
+- TheXaman por:
+  *Tubo MT/MO.

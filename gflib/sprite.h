@@ -310,6 +310,8 @@ void RequestSpriteSheetCopy(const struct SpriteSheet *sheet);
 u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet);
 void FreeAllSpritePalettes(void);
 u8 LoadSpritePalette(const struct SpritePalette *palette);
+u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, u32 personality);
+u8 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct SpritePalette *palette2);
 u8 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum);
 u8 LoadSpritePaletteDouble(const struct SpritePalette *palette);
 void LoadSpritePalettes(const struct SpritePalette *palettes);

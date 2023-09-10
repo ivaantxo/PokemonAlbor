@@ -34,6 +34,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "trig.h"
+#include "util.h"
 #include "walda_phrase.h"
 #include "window.h"
 #include "constants/form_change_types.h"
@@ -447,7 +448,7 @@ struct PokemonStorageSystemData
     u16 scrollUnused4; // Never read
     u16 scrollUnused5; // Never read
     u16 scrollUnused6; // Never read
-    u8 filler1[22];
+    u8 paletasHuevos[22];
     u8 boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u8 wallpaperLoadState; // Written to, but never read.
@@ -4114,16 +4115,32 @@ static void CreateDisplayMonSprite(void)
 
 static void LoadDisplayMonGfx(u16 species, u32 pid)
 {
+    const struct CompressedSpritePalette *pal1, *pal2;
+
     if (sStorage->displayMonSprite == NULL)
         return;
 
-    if (species != SPECIES_NONE)
+    if (species == SPECIES_EGG)
+	{
+		pal1 = &gEgg1PaletteTable[sStorage->paletasHuevos[0]];
+		pal2 = &gEgg2PaletteTable[sStorage->paletasHuevos[1]];
+		LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
+		LZ77UnCompWram(pal1->data, sStorage->displayMonPalBuffer);
+		LZ77UnCompWram(pal2->data, gDecompressionBuffer);
+		CpuCopy32(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
+		LoadPalette(sStorage->displayMonPalBuffer, sStorage->displayMonPalOffset, 0x10);
+		LoadPalette(gDecompressionBuffer, sStorage->displayMonPalOffset + 8, 0x10);
+		sStorage->displayMonSprite->invisible = FALSE;
+	}
+    else if (species != SPECIES_NONE)
     {
         LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         // LZ77UnCompWram(sStorage->displayMonPalette, sStorage->displayMonPalBuffer);
         CpuFastCopy(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, 0x20);
         // LoadPalette(sStorage->displayMonPalBuffer, sStorage->displayMonPalOffset, 0x20);
+        UniquePalette(sStorage->displayMonPalOffset, pid);
+		CpuCopy32(gPlttBufferFaded + sStorage->displayMonPalOffset, gPlttBufferUnfaded + sStorage->displayMonPalOffset, 32);
         sStorage->displayMonSprite->invisible = FALSE;
     }
     else
@@ -7205,6 +7222,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+            sStorage->paletasHuevos[0] = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[0];
+            sStorage->paletasHuevos[1] = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[1];
         }
     }
     else if (mode == MODE_BOX)
@@ -7230,6 +7249,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, otId, sStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+            sStorage->paletasHuevos[0] = gSpeciesInfo[GetBoxMonData(boxMon, MON_DATA_SPECIES)].types[0];
+            sStorage->paletasHuevos[1] = gSpeciesInfo[GetBoxMonData(boxMon, MON_DATA_SPECIES)].types[1];
         }
     }
     else

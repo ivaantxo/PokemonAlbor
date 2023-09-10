@@ -4,6 +4,7 @@
 #include "sprite.h"
 
 extern u8 ALIGNED(4) gDecompressionBuffer[0x4000];
+extern u8 gEggDecompressionBuffer[0x10];
 
 void LZDecompressWram(const u32 *src, void *dest);
 void LZDecompressVram(const u32 *src, void *dest);
@@ -13,6 +14,9 @@ void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet 
 bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src);
 
 void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src);
+void LoadCompressedUniqueSpritePalette(const struct CompressedSpritePalette *src, u32 personality);
+void LoadCompressedEggSpritePalette(const struct CompressedSpritePalette *src1, const struct CompressedSpritePalette *src2);
+void LoadCompressedEggHatchSpritePalette(const struct CompressedSpritePalette *src1, const struct CompressedSpritePalette *src2);
 void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer);
 bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette *src);
 

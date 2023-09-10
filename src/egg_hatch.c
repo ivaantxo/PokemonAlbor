@@ -444,7 +444,7 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
             HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->sprites.ptr[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
                                      species, pid);
-            LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
+            LoadCompressedUniqueSpritePalette(GetMonSpritePalStruct(mon), pid);
             *speciesLoc = species;
         }
         break;
@@ -486,6 +486,8 @@ static void Task_EggHatch(u8 taskId)
 
 static void CB2_LoadEggHatch(void)
 {
+    const struct CompressedSpritePalette *pal1, *pal2;
+
     switch (gMain.state)
     {
     case 0:
@@ -535,7 +537,9 @@ static void CB2_LoadEggHatch(void)
     case 3:
         LoadSpriteSheet(&sEggHatch_Sheet);
         LoadSpriteSheet(&sEggShards_Sheet);
-        LoadSpritePalette(&sEgg_SpritePalette);
+		pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES)].types[0]];
+		pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES)].types[1]];
+		LoadCompressedEggHatchSpritePalette(pal1, pal2);
         gMain.state++;
         break;
     case 4:

@@ -70,12 +70,15 @@ Debug_BoxFilledMessage_Text:
 	.string "Storage boxes filled!$"
 
 Debug_Script_1::
+    giveegg SPECIES_BULBASAUR
 	end
 
 Debug_Script_2::
+    giveegg SPECIES_PIDGEY
 	end
 
 Debug_Script_3::
+    giveegg SPECIES_LARVESTA
 	end
 
 Debug_Script_4::

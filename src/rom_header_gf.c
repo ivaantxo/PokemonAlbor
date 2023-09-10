@@ -24,6 +24,8 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * monBackPics;
     const struct CompressedSpritePalette * monNormalPalettes;
     const struct CompressedSpritePalette * monShinyPalettes;
+    const struct CompressedSpritePalette * monEggPalette1;
+    const struct CompressedSpritePalette * monEggPalette2;
     const u8 *const * monIcons;
     const u8 *monIconPaletteIds;
     const struct SpritePalette * monIconPalettes;
@@ -104,6 +106,8 @@ static const struct GFRomHeader sGFRomHeader = {
     .monBackPics = gMonBackPicTable,
     .monNormalPalettes = gMonPaletteTable,
     .monShinyPalettes = gMonShinyPaletteTable,
+    .monEggPalette1 = gEgg1PaletteTable,
+    .monEggPalette2 = gEgg1PaletteTable,
     .monIcons = gMonIconTable,
     .monIconPaletteIds = gMonIconPaletteIndices,
     .monIconPalettes = gMonIconPaletteTable,
