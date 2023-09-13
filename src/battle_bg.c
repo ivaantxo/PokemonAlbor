@@ -175,12 +175,12 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
     },
     [B_WIN_ACTION_MENU] = {//Luchar, mochila...
         .bg = 0,
-        .tilemapLeft = 17,
-        .tilemapTop = 35,
-        .width = 12,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 400,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0,
     },
     [B_WIN_MOVE_NAME_1] = {//arriba-izquierda
         .bg = 0,
@@ -237,13 +237,12 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .baseBlock = 0,
     },
     [B_WIN_PP_REMAINING] = {//icono tipo
-        .bg = 0,
-        .tilemapLeft = 25,
-        .tilemapTop = 55,
-        .width = 4,
-        .height = 2,
-        .paletteNum = 12,
-        .baseBlock = 664,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0,
     },
     [B_WIN_MOVE_TYPE] = {//número pp
         .bg = 0,
@@ -718,7 +717,7 @@ void InitBattleBgsVideo(void)
 
 void LoadBattleMenuWindowGfx(void)
 {
-    LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
+    //LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
     //LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
     LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
 
@@ -837,7 +836,7 @@ void LoadBattleTextboxAndBackground(void)
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-	LoadPalette(gMenuInfoElements_Pal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+	//LoadPalette(gMenuInfoElements_Pal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
     LoadBattleMenuWindowGfx();
 #if B_TERRAIN_BG_CHANGE == TRUE
     DrawTerrainTypeBattleBackground();

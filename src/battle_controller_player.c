@@ -1705,15 +1705,51 @@ static void MoveSelectionDisplayPpNumber(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
+extern const struct CompressedSpriteSheet gSpriteSheet_MoveTypes;
+extern const struct SpriteTemplate gSpriteTemplate_MoveTypes;
+
+#define TYPE_ICON_PAL_1     12
+#define TYPE_ICON_PAL_2     13
+
+static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
+{
+    [TYPE_NORMAL] = TYPE_ICON_PAL_1,
+    [TYPE_FIGHTING] = TYPE_ICON_PAL_2,
+    [TYPE_FLYING] = TYPE_ICON_PAL_1,
+    [TYPE_POISON] = TYPE_ICON_PAL_1,
+    [TYPE_GROUND] = TYPE_ICON_PAL_2,
+    [TYPE_ROCK] = TYPE_ICON_PAL_2,
+    [TYPE_BUG] = TYPE_ICON_PAL_1,
+    [TYPE_GHOST] = TYPE_ICON_PAL_2,
+    [TYPE_STEEL] = TYPE_ICON_PAL_1,
+    [TYPE_MYSTERY] = TYPE_ICON_PAL_1,
+    [TYPE_FIRE] = TYPE_ICON_PAL_1,
+    [TYPE_WATER] = TYPE_ICON_PAL_2,
+    [TYPE_GRASS] = TYPE_ICON_PAL_2,
+    [TYPE_ELECTRIC] = TYPE_ICON_PAL_2,
+    [TYPE_PSYCHIC] = TYPE_ICON_PAL_2,
+    [TYPE_ICE] = TYPE_ICON_PAL_1,
+    [TYPE_DRAGON] = TYPE_ICON_PAL_1,
+    [TYPE_DARK] = TYPE_ICON_PAL_2,
+    [TYPE_FAIRY] = TYPE_ICON_PAL_1,
+};
+
 static void MoveSelectionDisplayMoveType(void)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[gActiveBattler][4]);
 	u8 type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
+    struct Sprite *sprite;
 
-	FillWindowPixelRect(9, PIXEL_FILL(3), 0, 0, 32, 16);
-	BlitMenuInfoIcon(9, type + 1, 0, 3);
-	PutWindowTilemap(9);
-	CopyWindowToVram(9, COPYWIN_FULL);
+	//FillWindowPixelRect(9, PIXEL_FILL(0), 0, 0, 32, 16);
+    LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
+    LoadCompressedPalette(gMoveTypes_Pal, 0x1C0, 0x60);
+	//BlitMenuInfoIcon(9, type + 1, 0, 3);
+    moveInfo->typeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 180, 120, 0);
+    sprite = &gSprites[moveInfo->typeIconSpriteId];
+    StartSpriteAnim(sprite, type);
+    sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[type];
+    //PutWindowTilemap(9);
+	//CopyWindowToVram(9, COPYWIN_FULL);
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
@@ -2803,7 +2839,7 @@ static void PlayerHandleChooseAction(void)
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
-    BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
+    //BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
