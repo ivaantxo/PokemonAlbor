@@ -957,12 +957,12 @@ static void AddTextPrinterParameterized_ColorByIndex(u8 windowId, u8 fontId, con
 
 static void TMCase_SetWindowBorder1(u8 windowId)
 {
-    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x5B, 0x0E);
+
 }
 
 static void TMCase_SetWindowBorder2(u8 windowId)
 {
-    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x78, 0x0D);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x78, 14);
 }
 
 static void TMCase_SetWindowBorder3(u8 windowId)
