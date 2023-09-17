@@ -2,6 +2,10 @@
 
 const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
 const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox.gbapal.lz");
+const u32 gBattleTextboxPaletteBag[] = INCBIN_U32("graphics/battle_interface/textbox_bag.gbapal.lz");
+const u32 gBattleTextboxPaletteFight[] = INCBIN_U32("graphics/battle_interface/textbox_fight.gbapal.lz");
+const u32 gBattleTextboxPaletteRun[] = INCBIN_U32("graphics/battle_interface/textbox_run.gbapal.lz");
+const u32 gBattleTextboxPalettePokemon[] = INCBIN_U32("graphics/battle_interface/textbox_pokemon.gbapal.lz");
 const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
 
 const u32 gSmokescreenImpactTiles[] = INCBIN_U32("graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz");
@@ -1258,8 +1262,6 @@ const u16 gTilesetAnims_BattleDomePals0_0[] = INCBIN_U16("graphics/battle_fronti
 const u16 gTilesetAnims_BattleDomePals0_1[] = INCBIN_U16("graphics/battle_frontier/dome_anim2.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_2[] = INCBIN_U16("graphics/battle_frontier/dome_anim3.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_3[] = INCBIN_U16("graphics/battle_frontier/dome_anim4.gbapal");
-
-static const u16 sUnused0[] = {0x13F, 0x119, 0x113, 0x10E};
 
 const u16 gBattlePyramidFloor_Pal[] = INCBIN_U16("graphics/battle_frontier/pyramid_floor.gbapal");
 

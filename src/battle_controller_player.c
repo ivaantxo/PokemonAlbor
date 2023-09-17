@@ -122,6 +122,7 @@ static void DoSwitchOutAnimation(void);
 static void PlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8);
 static void EndDrawPartyStatusSummary(void);
+static void LightSelectionMenu(void);
 
 static void ReloadMoveNames(void);
 
@@ -270,9 +271,10 @@ static void HandleInputChooseAction(void)
         if (gActionSelectionCursor[gActiveBattler] & 1) // if is B_ACTION_USE_ITEM or B_ACTION_RUN
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            //ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            LightSelectionMenu();
         }
     }
     else if (JOY_NEW(DPAD_RIGHT))
@@ -280,9 +282,10 @@ static void HandleInputChooseAction(void)
         if (!(gActionSelectionCursor[gActiveBattler] & 1)) // if is B_ACTION_USE_MOVE or B_ACTION_SWITCH
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            //ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            LightSelectionMenu();
         }
     }
     else if (JOY_NEW(DPAD_UP))
@@ -290,9 +293,10 @@ static void HandleInputChooseAction(void)
         if (gActionSelectionCursor[gActiveBattler] & 2) // if is B_ACTION_SWITCH or B_ACTION_RUN
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            //ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            LightSelectionMenu();
         }
     }
     else if (JOY_NEW(DPAD_DOWN))
@@ -300,9 +304,10 @@ static void HandleInputChooseAction(void)
         if (!(gActionSelectionCursor[gActiveBattler] & 2)) // if is B_ACTION_USE_MOVE or B_ACTION_USE_ITEM
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            //ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            LightSelectionMenu();
         }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -1744,10 +1749,11 @@ static void MoveSelectionDisplayMoveType(void)
     LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
     LoadCompressedPalette(gMoveTypes_Pal, 0x1C0, 0x60);
 	//BlitMenuInfoIcon(9, type + 1, 0, 3);
-    moveInfo->typeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 180, 120, 0);
+    moveInfo->typeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 215, 126, 0);
     sprite = &gSprites[moveInfo->typeIconSpriteId];
     StartSpriteAnim(sprite, type);
     sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[type];
+    sprite->oam.priority = 0;
     //PutWindowTilemap(9);
 	//CopyWindowToVram(9, COPYWIN_FULL);
 }
@@ -2829,6 +2835,7 @@ static void HandleChooseActionAfterDma3(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = DISPLAY_HEIGHT;
+        LightSelectionMenu();
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseAction;
     }
 }
@@ -2841,11 +2848,11 @@ static void PlayerHandleChooseAction(void)
     BattleTv_ClearExplosionFaintCause();
     //BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
 
-    for (i = 0; i < 4; i++)
+    //for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
     TryRestoreLastUsedBall();
-    ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+    //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
@@ -3430,4 +3437,23 @@ static void PlayerHandleBattleDebug(void)
 
 static void PlayerCmdEnd(void)
 {
+}
+
+static void LightSelectionMenu(void)
+{
+	switch (gActionSelectionCursor[gActiveBattler])
+	{
+	case 0:
+		LoadCompressedPalette(gBattleTextboxPaletteFight, 0, 2 * PLTT_SIZE_4BPP);
+		break;
+	case 1:
+		LoadCompressedPalette(gBattleTextboxPaletteBag, 0, 2 * PLTT_SIZE_4BPP);
+		break;
+	case 2:
+		LoadCompressedPalette(gBattleTextboxPalettePokemon, 0, 2 * PLTT_SIZE_4BPP);
+		break;
+	case 3:
+		LoadCompressedPalette(gBattleTextboxPaletteRun, 0, 2 * PLTT_SIZE_4BPP);
+		break;
+	}
 }
