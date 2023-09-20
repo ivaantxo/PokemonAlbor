@@ -2,6 +2,7 @@
 #define GUARD_TEXT_WINDOW_H
 
 #define WINDOW_FRAMES_COUNT 20
+#define BATTLE_WINDOW_FRAMES_COUNT 2
 
 struct TilesPal
 {
@@ -15,7 +16,9 @@ extern const u16 gTextWindowFrame1_Pal[];
 const struct TilesPal *GetWindowFrameTilesPal(u8 id);
 void LoadMessageBoxGfx(u8 windowId, u16 destOffset, u8 palOffset);
 void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset);
+void LoadBattleWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset);
 void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset);
+void LoadBattleWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset);
 void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset);
 void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset);
 void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum);

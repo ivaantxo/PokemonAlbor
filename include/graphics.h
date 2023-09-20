@@ -7593,6 +7593,8 @@ extern const u32 gBattleVSFrame_Pal[];
 extern const u32 gBattleVSFrame_Tilemap[];
 extern const u32 gMultiBattleIntroBg_Opponent_Tilemap[];
 extern const u32 gMultiBattleIntroBg_Player_Tilemap[];
+extern const u16 gPaletaTipoIconos1[];
+extern const u16 gPaletaTipoIconos2[];
 
 // battle terrains
 extern const u32 gBattleTerrainTiles_TallGrass[];

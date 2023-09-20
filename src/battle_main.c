@@ -2570,7 +2570,7 @@ static void AskRecordBattle(void)
             HandleBattleWindow(YESNOBOX_X_Y, 0);
             BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateYesNoCursorAt(1);
+            //BattleCreateYesNoCursorAt(1);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2583,7 +2583,7 @@ static void AskRecordBattle(void)
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
                 gBattleCommunication[CURSOR_POSITION] = 0;
-                BattleCreateYesNoCursorAt(0);
+                //BattleCreateYesNoCursorAt(0);
             }
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -2594,7 +2594,7 @@ static void AskRecordBattle(void)
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
                 gBattleCommunication[CURSOR_POSITION] = 1;
-                BattleCreateYesNoCursorAt(1);
+                //BattleCreateYesNoCursorAt(1);
             }
         }
         else if (JOY_NEW(A_BUTTON))

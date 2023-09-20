@@ -62,6 +62,7 @@
 #include "battle_util.h"
 #include "constants/pokemon.h"
 #include "config/battle.h"
+#include "text_window.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
@@ -7196,7 +7197,7 @@ static void Cmd_yesnoboxlearnmove(void)
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateYesNoCursorAt(0);
+        //BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
@@ -7204,14 +7205,14 @@ static void Cmd_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateYesNoCursorAt(0);
+            //BattleCreateYesNoCursorAt(0);
         }
         if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateYesNoCursorAt(1);
+            //BattleCreateYesNoCursorAt(1);
         }
         if (JOY_NEW(A_BUTTON))
         {
@@ -7312,7 +7313,7 @@ static void Cmd_yesnoboxstoplearningmove(void)
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateYesNoCursorAt(0);
+        //BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
@@ -7320,14 +7321,14 @@ static void Cmd_yesnoboxstoplearningmove(void)
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateYesNoCursorAt(0);
+            //BattleCreateYesNoCursorAt(0);
         }
         if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateYesNoCursorAt(1);
+            //BattleCreateYesNoCursorAt(1);
         }
         if (JOY_NEW(A_BUTTON))
         {
@@ -7660,7 +7661,7 @@ static void Cmd_yesnobox(void)
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[0]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateYesNoCursorAt(0);
+        //BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
@@ -7668,14 +7669,14 @@ static void Cmd_yesnobox(void)
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateYesNoCursorAt(0);
+            //BattleCreateYesNoCursorAt(0);
         }
         if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateYesNoCursorAt(1);
+            //BattleCreateYesNoCursorAt(1);
         }
         if (JOY_NEW(B_BUTTON))
         {
@@ -7869,6 +7870,7 @@ static void Cmd_drawlvlupbox(void)
         break;
     case 4:
         // Draw page 1 of level up box
+        LoadBattleWindowBorderGfx(B_WIN_LEVEL_UP_BOX, 0x22, BG_PLTT_ID(1));
         DrawLevelUpWindow1();
         PutWindowTilemap(B_WIN_LEVEL_UP_BOX);
         CopyWindowToVram(B_WIN_LEVEL_UP_BOX, COPYWIN_FULL);
@@ -8077,7 +8079,7 @@ static void PutMonIconOnLvlUpBanner(void)
     LoadSpriteSheet(&iconSheet);
     // LoadSpritePalette(&iconPalSheet);
 
-    spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBanner, 256, 10, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBanner, 256, 8, 0);
     gSprites[spriteId].sDestroy = FALSE;
     gSprites[spriteId].sXOffset = gBattle_BG2_X;
     SetMonIconPalette(&gPlayerParty[gBattleStruct->expGetterMonId], NULL, index);
@@ -15630,22 +15632,12 @@ void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
 
 void BattleCreateYesNoCursorAt(u8 cursorPosition)
 {
-    u16 src[2];
-    src[0] = 1;
-    src[1] = 2;
 
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x19, 9 + (2 * cursorPosition), 1, 2, 0x11);
-    CopyBgTilemapBufferToVram(0);
 }
 
 void BattleDestroyYesNoCursorAt(u8 cursorPosition)
 {
-    u16 src[2];
-    src[0] = 0x1016;
-    src[1] = 0x1016;
 
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 0x19, 9 + (2 * cursorPosition), 1, 2, 0x11);
-    CopyBgTilemapBufferToVram(0);
 }
 
 static void Cmd_trygivecaughtmonnick(void)
@@ -15659,7 +15651,7 @@ static void Cmd_trygivecaughtmonnick(void)
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[MULTIUSE_STATE]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateYesNoCursorAt(0);
+        //BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
@@ -15667,14 +15659,14 @@ static void Cmd_trygivecaughtmonnick(void)
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateYesNoCursorAt(0);
+            //BattleCreateYesNoCursorAt(0);
         }
         if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateYesNoCursorAt(1);
+            //BattleCreateYesNoCursorAt(1);
         }
         if (JOY_NEW(A_BUTTON))
         {

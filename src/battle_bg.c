@@ -27,9 +27,6 @@
 #include "constants/trainers.h"
 #include "constants/battle_anim.h"
 
-// .rodata
-static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?
-
 static const struct OamData sVsLetter_V_OamData =
 {
     .y = 0,
@@ -188,7 +185,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 55,
         .width = 16,    //for z move names
         .height = 2,
-        .paletteNum = 5,
+        .paletteNum = 0,
         .baseBlock = 768,
     },
     [B_WIN_MOVE_NAME_2] = {//arriba-derecha
@@ -197,7 +194,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 55,
         .width = 10,
         .height = 2,
-        .paletteNum = 5,
+        .paletteNum = 0,
         .baseBlock = 796,
     },
     [B_WIN_MOVE_NAME_3] = {//abajo-izquierda
@@ -206,7 +203,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 57,
         .width = 10,
         .height = 2,
-        .paletteNum = 5,
+        .paletteNum = 0,
         .baseBlock = 816,
     },
     [B_WIN_MOVE_NAME_4] = {//abajo-derecha
@@ -215,7 +212,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 57,
         .width = 10,
         .height = 2,
-        .paletteNum = 5,
+        .paletteNum = 0,
         .baseBlock = 836,
     },
     [B_WIN_PP] = {//no se usa
@@ -237,12 +234,12 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .baseBlock = 0,
     },
     [B_WIN_PP_REMAINING] = {//icono tipo
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 0,
-        .height = 0,
-        .paletteNum = 0,
-        .baseBlock = 0,
+        .tilemapLeft = 25,
+        .tilemapTop = 55,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 688,
     },
     [B_WIN_MOVE_TYPE] = {//número pp
         .bg = 0,
@@ -286,7 +283,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 0,
         .width = 12,
         .height = 3,
-        .paletteNum = 6,
+        .paletteNum = 0,
         .baseBlock = 366,
     },
     [B_WIN_VS_PLAYER] = {
@@ -836,7 +833,7 @@ void LoadBattleTextboxAndBackground(void)
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-	//LoadPalette(gMenuInfoElements_Pal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+    LoadPalette(gPaletaTipoIconos1, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadBattleMenuWindowGfx();
 #if B_TERRAIN_BG_CHANGE == TRUE
     DrawTerrainTypeBattleBackground();

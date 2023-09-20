@@ -924,7 +924,7 @@ static void Task_EvolutionScene(u8 taskId)
                 BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
                 gTasks[taskId].tLearnMoveState++;
                 sEvoCursorPos = 0;
-                BattleCreateYesNoCursorAt(0);
+                //BattleCreateYesNoCursorAt(0);
             }
             break;
         case MVSTATE_HANDLE_YES_NO:
@@ -937,7 +937,7 @@ static void Task_EvolutionScene(u8 taskId)
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(sEvoCursorPos);
                 sEvoCursorPos = 0;
-                BattleCreateYesNoCursorAt(0);
+                //BattleCreateYesNoCursorAt(0);
             }
             if (JOY_NEW(DPAD_DOWN) && sEvoCursorPos == 0)
             {
@@ -945,7 +945,7 @@ static void Task_EvolutionScene(u8 taskId)
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(sEvoCursorPos);
                 sEvoCursorPos = 1;
-                BattleCreateYesNoCursorAt(1);
+                //BattleCreateYesNoCursorAt(1);
             }
             if (JOY_NEW(A_BUTTON))
             {

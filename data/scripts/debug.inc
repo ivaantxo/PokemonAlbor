@@ -82,6 +82,7 @@ Debug_Script_3::
 	end
 
 Debug_Script_4::
+	trainerbattle_single TRAINER_CALVIN_1, 0, 0, 0
 	end
 
 Debug_Script_5::

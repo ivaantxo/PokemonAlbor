@@ -27,6 +27,9 @@ static const u8 sTextWindowFrame18_Gfx[] = INCBIN_U8("graphics/text_window/18.4b
 static const u8 sTextWindowFrame19_Gfx[] = INCBIN_U8("graphics/text_window/19.4bpp");
 static const u8 sTextWindowFrame20_Gfx[] = INCBIN_U8("graphics/text_window/20.4bpp");
 
+const u8 gBattleTextWindowFrameRojo[] = INCBIN_U8("graphics/battle_interface/battle_windows/rojo.4bpp");
+const u8 gBattleTextWindowFrameNegro[] = INCBIN_U8("graphics/battle_interface/battle_windows/negro.4bpp");
+
 const u16 gTextWindowFrame1_Pal[] = INCBIN_U16("graphics/text_window/1.gbapal");
 static const u16 sTextWindowFrame2_Pal[] = INCBIN_U16("graphics/text_window/2.gbapal");
 static const u16 sTextWindowFrame3_Pal[] = INCBIN_U16("graphics/text_window/3.gbapal");
@@ -47,6 +50,9 @@ static const u16 sTextWindowFrame17_Pal[] = INCBIN_U16("graphics/text_window/17.
 static const u16 sTextWindowFrame18_Pal[] = INCBIN_U16("graphics/text_window/18.gbapal");
 static const u16 sTextWindowFrame19_Pal[] = INCBIN_U16("graphics/text_window/19.gbapal");
 static const u16 sTextWindowFrame20_Pal[] = INCBIN_U16("graphics/text_window/20.gbapal");
+
+const u16 gBattleTextWindowFrameRojo_Pal[] = INCBIN_U16("graphics/battle_interface/battle_windows/rojo.gbapal");
+const u16 gBattleTextWindowFrameNegro_Pal[] = INCBIN_U16("graphics/battle_interface/battle_windows/negro.gbapal");
 
 static const u16 sTextWindowPalettes[][16] =
 {
@@ -81,6 +87,12 @@ static const struct TilesPal sWindowFrames[WINDOW_FRAMES_COUNT] =
     {sTextWindowFrame20_Gfx, sTextWindowFrame20_Pal}
 };
 
+const struct TilesPal sBattleWindowFrames[BATTLE_WINDOW_FRAMES_COUNT] =
+{
+    {gBattleTextWindowFrameRojo, gBattleTextWindowFrameRojo_Pal},
+    {gBattleTextWindowFrameNegro, gBattleTextWindowFrameNegro_Pal}
+};
+
 // code
 const struct TilesPal *GetWindowFrameTilesPal(u8 id)
 {
@@ -107,9 +119,20 @@ void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
     LoadPalette(sWindowFrames[frameId].pal, palOffset, PLTT_SIZE_4BPP);
 }
 
+void LoadBattleWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
+{
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sBattleWindowFrames[frameId].tiles, 0x120, destOffset);
+    LoadPalette(sBattleWindowFrames[frameId].pal, palOffset, PLTT_SIZE_4BPP);
+}
+
 void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
+}
+
+void LoadBattleWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
+{
+    LoadBattleWindowGfx(windowId, gSaveBlock2Ptr->optionsBattleWindowFrame, destOffset, palOffset);
 }
 
 void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum)

@@ -184,7 +184,7 @@ static const u8 sTMCaseTextColors[][3] = {
     {0, 1, 2},
     {0, 2, 3},
     {0, 3, 6},
-    {0, 14, 10},
+    {0, 1, 3},
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
 };
 
