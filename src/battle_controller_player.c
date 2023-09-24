@@ -2775,8 +2775,8 @@ static void PlayerHandleChooseAction(void)
 
     TryRestoreLastUsedBall();
     //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+    //BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
+    //BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
 static void PlayerHandleYesNoBox(void)
