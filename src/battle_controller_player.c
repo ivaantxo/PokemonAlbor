@@ -2771,7 +2771,7 @@ static void PlayerHandleChooseAction(void)
     //BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
 
     //for (i = 0; i < 4; i++)
-        ActionSelectionDestroyCursorAt(i);
+    //    ActionSelectionDestroyCursorAt(i);
 
     TryRestoreLastUsedBall();
     //ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
